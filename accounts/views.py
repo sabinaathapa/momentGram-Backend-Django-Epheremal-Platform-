@@ -52,3 +52,19 @@ class LoginAPIView(generics.CreateAPIView):
             }
             return Response(response_data, status=status.HTTP_401_UNAUTHORIZED)
 
+
+# User Profile Picture View
+class UserProfilePictureView(generics.ListCreateAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    # Saving the profile picture of the requesting user
+    def perform_create(self, serializer):
+        user = self.request.user
+        serializer.save(user_id=user)
+
+    # Retrieving only the profile picture of the requesting user
+    def get_queryset(self):
+        user = self.request.user
+        return UserProfile.objects.filter(user_id=user)

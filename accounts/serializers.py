@@ -13,7 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'created_at', 'updated_at']
+        fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'followers', 'following',
+                  'created_at', 'updated_at']
 
     def create(self, validated_data):
         # Hash the password before saving
@@ -30,7 +31,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         fields = ['username', 'password']
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'profile_picture']
+        fields = ['id', 'bio', 'user_id', 'profile_picture']

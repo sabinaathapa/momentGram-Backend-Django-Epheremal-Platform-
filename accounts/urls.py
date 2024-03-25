@@ -9,4 +9,5 @@ from .views import *
 urlpatterns = [
     path('user-register/', UserRegistrationView.as_view(), name='user-register'),
     path('login/', LoginAPIView.as_view(), name='login'),
+    path('profile-picture/', UserProfilePictureView.as_view(), name='user-profile-picture'),
  ]
